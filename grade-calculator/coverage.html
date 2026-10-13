@@ -55,7 +55,7 @@
 			<div id="nav">
 				<select id="files">
 				
-				<option value="file0">esep/grade-calculator/grade_calculator.go (80.0%)</option>
+				<option value="file0">esep/grade-calculator/grade_calculator.go (100.0%)</option>
 				
 				</select>
 			</div>
@@ -92,7 +92,7 @@ var gradeTypeName = map[GradeType]string{
 }
 
 func (gt GradeType) String() string {
-        <span class="cov0" title="0">return gradeTypeName[gt]
+        <span class="cov8" title="1">return gradeTypeName[gt]
 </span>}
 
 type Grade struct {
@@ -113,13 +113,13 @@ func (gc *GradeCalculator) GetFinalGrade() string {
         <span class="cov8" title="1">numericalGrade := gc.calculateNumericalGrade()
 </span>
         <span class="cov8" title="1">if numericalGrade &gt;= 90 </span>{
-                <span class="cov0" title="0">return "A"
+                <span class="cov8" title="1">return "A"
 </span>        } else <span class="cov8" title="1">if numericalGrade &gt;= 80 </span>{
-                <span class="cov0" title="0">return "B"
+                <span class="cov8" title="1">return "B"
 </span>        } else <span class="cov8" title="1">if numericalGrade &gt;= 70 </span>{
-                <span class="cov0" title="0">return "C"
+                <span class="cov8" title="1">return "C"
 </span>        } else <span class="cov8" title="1">if numericalGrade &gt;= 60 </span>{
-                <span class="cov0" title="0">return "D"
+                <span class="cov8" title="1">return "D"
 </span>        }
 
         <span class="cov8" title="1">return "F"</span>
@@ -151,21 +151,25 @@ func (gc *GradeCalculator) AddGrade(name string, grade int, gradeType GradeType)
 func (gc *GradeCalculator) calculateNumericalGrade() int {
         <span class="cov8" title="1">assignment_average := computeAverage(gc.assignments)
         exam_average := computeAverage(gc.exams)
-        essay_average := computeAverage(gc.exams)
+        essay_average := computeAverage(gc.essays)
 </span>
         <span class="cov8" title="1">weighted_grade := float64(assignment_average)*.5 + float64(exam_average)*.35 + float64(essay_average)*.15
 </span>
         <span class="cov8" title="1">return int(weighted_grade)
 </span>}
 
-func computeAverage(grades []Grade) int {
-        <span class="cov8" title="1">sum := 0
-</span>
-        <span class="cov8" title="1">for grade, _ := range grades </span>{
-                <span class="cov8" title="1">sum += grade
-</span>        }
+func computeAverage(grades []Grade) float64 {
+    <span class="cov8" title="1">if len(grades) == 0 </span>{
+        <span class="cov8" title="1">return 0
+</span>    }
 
-        <span class="cov8" title="1">return sum / len(grades)</span>
+    <span class="cov8" title="1">sum := 0
+</span>
+    <span class="cov8" title="1">for _, grade := range grades </span>{
+        <span class="cov8" title="1">sum += grade.Grade
+</span>    }
+
+    <span class="cov8" title="1">return float64(sum) / float64(len(grades))</span>
 }
 </pre>
 		
